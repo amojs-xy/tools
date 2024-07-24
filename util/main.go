@@ -49,6 +49,27 @@ func NumberToString[T Number](v T, dp int) string {
 	return str
 }
 
+func StringToNumber[T Number](v string, numberType string, dp int) (T, error) {
+	d, err := strconv.Atoi(v)
+
+	if err != nil {
+		return 0, err
+	}
+
+	switch numberType {
+	case "int32":
+		return T(int32(d)), nil
+	case "int64":
+		return T(int64(d)), nil
+	case "float32":
+		return T(float32(d)), nil
+	case "float64":
+		return T(float64(d)), nil
+	default:
+		return T(int32(d)), nil
+	}
+}
+
 func MapHasKey[K comparable, V any](m map[K]V, k K) bool {
 	_, ok := m[k]
 
